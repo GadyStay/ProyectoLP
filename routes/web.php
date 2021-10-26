@@ -26,6 +26,6 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('usuario', UsuarioController::class);
-Route::resource('block', BlockController::class);
-Route::resource('evento', EventoController::class);
+Route::resource('usuarios', UsuarioController::class);
+Route::resource('blocks', BlockController::class);
+Route::resource('eventos', EventoController::class);

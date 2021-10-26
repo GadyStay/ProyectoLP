@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Usuario;
 
 class UsuarioController extends Controller
 {
@@ -13,7 +14,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $usuario =new Usuario();
+        $resultado = $usuario::get();
+        return view('usuario.index', ['usuarios'=>$resultado]);
     }
 
     /**
@@ -23,7 +26,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        return view("usuario.crear");
     }
 
     /**
@@ -34,7 +37,15 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usuario = new Usuario();
+        $usuario->nombres = $request->nombres;
+        $usuario->apellidos = $request->apellidos;
+        $usuario->edad = $request->edad;
+        $usuario->numero = $request->numero;
+        $usuario->direccion = $request->direccion;
+        $usuario->correo = $request->correo;
+        $usuario->save();
+        return redirect(Route("usuarios.index"));
     }
 
     /**
@@ -56,7 +67,8 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $resultado = Usuario::find($id);
+        return view('usuario.editar', ["usuario"=>$resultado]);
     }
 
     /**
@@ -68,7 +80,15 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $usuario = Usuario::find($id);
+        $usuario->nombres = $request->nombres;
+        $usuario->apellidos = $request->apellidos;
+        $usuario->edad = $request->edad;
+        $usuario->numero = $request->numero;
+        $usuario->direccion = $request->direccion;
+        $usuario->correo = $request->correo;
+        $usuario->save();
+        return redirect(Route("usuarios.index"));
     }
 
     /**

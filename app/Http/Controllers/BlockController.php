@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Block;
 
 class BlockController extends Controller
 {
@@ -13,7 +14,9 @@ class BlockController extends Controller
      */
     public function index()
     {
-        //
+        $block =new Block();
+        $resultado = $block::get();
+        return view('block.index', ['blocks'=>$resultado]);
     }
 
     /**
@@ -23,7 +26,7 @@ class BlockController extends Controller
      */
     public function create()
     {
-        //
+        return view("block.crear");
     }
 
     /**
@@ -34,7 +37,11 @@ class BlockController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $block = new Block();
+        $block->nombres = $request->nombres;
+        $block->experiencia = $request->experiencia;
+        $block->save();
+        return redirect(Route("blocks.index"));
     }
 
     /**
@@ -56,7 +63,8 @@ class BlockController extends Controller
      */
     public function edit($id)
     {
-        //
+        $resultado = Block::find($id);
+        return view('block.editar', ["block"=>$resultado]);
     }
 
     /**
@@ -68,7 +76,11 @@ class BlockController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $block = Block::find($id);
+        $block->nombres = $request->nombres;
+        $block->experiencia = $request->experiencia;
+        $block->save();
+        return redirect(Route("blocks.index"));
     }
 
     /**
@@ -79,6 +91,8 @@ class BlockController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $block = Block::find($id);
+        $block->delete();
+        return redirect(Route("blocks.index"));
     }
 }

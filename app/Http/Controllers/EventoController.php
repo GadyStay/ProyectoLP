@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Evento;
 
 class EventoController extends Controller
 {
@@ -13,7 +14,7 @@ class EventoController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -23,7 +24,7 @@ class EventoController extends Controller
      */
     public function create()
     {
-        //
+        return view('eventos.crear');
     }
 
     /**
@@ -34,7 +35,13 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $evento = new Evento();
+        $evento->nombre = $request->nombre;
+        $evento->fecha = $request->fecha;
+        $evento->hora = $request->hora;
+        $evento->direccion = $request->direccion;
+        $evento->save();
+        return redirect(Route("eventos.index"));
     }
 
     /**
@@ -56,7 +63,8 @@ class EventoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $resultado = Evento::find($id);
+        return view('evento.editar', ["evento"=>$resultado]);
     }
 
     /**
@@ -68,7 +76,13 @@ class EventoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $evento = Evento::find($id);
+        $evento->nombre = $request->nombre;
+        $evento->fecha = $request->fecha;
+        $evento->hora = $request->hora;
+        $evento->direccion = $request->direccion;
+        $evento->save();
+        return redirect(Route("eventos.index"));
     }
 
     /**
