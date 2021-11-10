@@ -16,7 +16,7 @@ class UsuarioController extends Controller
     {
         $usuario =new Usuario();
         $resultado = $usuario::get();
-        return view('usuario.index', ['usuarios'=>$resultado]);
+        return view('usuarios.index', ['usuarios'=>$resultado]);
     }
 
     /**

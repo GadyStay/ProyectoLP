@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\BlockController;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,8 @@ require __DIR__.'/auth.php';
 Route::resource('usuarios', UsuarioController::class);
 Route::resource('blocks', BlockController::class);
 Route::resource('eventos', EventoController::class);
+
+Route::get('/admin', [AdminController::class, 'index'])
+    ->middleware('auth.admin')
+    ->name('admin.index')
+;

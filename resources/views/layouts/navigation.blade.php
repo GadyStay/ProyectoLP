@@ -20,7 +20,7 @@
                         {{ __('Blocks') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('eventos.crear')" :active="request()->routeIs('eventos.crear')">
+                    <x-nav-link :href="route('eventos.index')" :active="request()->routeIs('eventos.index')">
                         {{ __('Eventos') }}
                     </x-nav-link>
 

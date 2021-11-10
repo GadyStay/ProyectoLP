@@ -14,7 +14,9 @@ class EventoController extends Controller
      */
     public function index()
     {
-
+        $evento =new Evento();
+        $resultado = $evento::get();
+        return view('eventos.index', ['eventos'=>$resultado]);
     }
 
     /**
